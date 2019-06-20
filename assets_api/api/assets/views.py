@@ -23,7 +23,7 @@ class AssetResource(Resource):
             price = data['price']
             description = data['description']
             serial_no = data['serial_no']
-            purchase_date = datetime.today() #data['purchase_date']
+            purchase_date = datetime.strptime(data['purchase_date'], '%Y-%m-%d')
             is_dead = data['is_dead']
             category = data['category']
             organization = data['organization']
@@ -83,7 +83,7 @@ class AssignAssetResource(Resource):
             user = data['user'].lower()
             employee_id = data['employee_id']
             category = data['category']
-            date_assigned = datetime.strptime(data['date_assigned'], '%Y-%m-%d %H:%M:%S')  # data['date_assigned']
+            date_assigned = datetime.strptime(data['date_assigned'], '%Y-%m-%d')  # data['date_assigned']
             print(date_assigned)
             try:
                 get_asset = Asset.query.filter_by(asset_name=asset_name).first()
@@ -116,6 +116,6 @@ class AssignedAssetRes(Resource):
 
 
 api.add_resource(AssetResource, '/api/asset')
-api.add_resource(AssignAssetResource, '/api/assign')
-api.add_resource(AssignedAssetRes, '/api/assignasset/<string:name>')
+api.add_resource(AssignAssetResource, '/api/assetassign')
+api.add_resource(AssignedAssetRes, '/api/assignedasset/<string:name>')
 app.register_blueprint(asset_bp)
