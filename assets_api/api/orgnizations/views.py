@@ -1,4 +1,4 @@
-from flask import Flask, request, Blueprint, jsonify, json
+from flask import Flask, request, Blueprint, jsonify, json, render_template, url_for
 from flask_restful import Resource, Api
 from assets_api.api import app, db
 from assets_api.models import Organization, organization_schema, Department
@@ -14,7 +14,8 @@ org_list = []
 
 @organization.route('/')
 def index():
-    return "<h1>Welcome to RESTful Page.</h1>"
+    # return "<h1>Welcome to RESTful Page.</h1>"
+    return render_template('index.html')
 
 
 class OrganizationResource(Resource):
