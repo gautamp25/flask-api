@@ -9,7 +9,6 @@ from datetime import datetime, date
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-
 employee_bp = Blueprint('employee_bp', __name__)
 api = Api(employee_bp)
 
@@ -28,7 +27,7 @@ class EmployeeResource(Resource):
             password = data['firstname']+'123'
             department = data['department']
             joindate = datetime.today()
-            print('***********', username, password, department, joindate)
+            # print('***********', username, password, department, joindate)
 
             try:
                 dpname = Department.query.filter_by(dp_name=department).first()
@@ -50,26 +49,21 @@ class EmployeeResource(Resource):
             return {'message': 'Something went wrong'}
 
 
-# class EmployeeRes(Resource):
-#
-#     def delete(self, name):
-#         try:
-#             org = Employee.query.filter_by(id=1).first()
-#             # result = organization_schema.dump(org)
-#             # org_id = json.dump(org.id)
-#             print('********',org, org.id)
-#             # department = Department.query.filter_by(organization_id=org.id).first()
-#             # print(department.id)
-#             db.session.delete(org.id)
-#             # db.session.delete(department.id)
-#             db.session.commit()
-#         except:
-#             return {'message': 'Something went wrong'}, 400
-#         return {'Success': 'User delete successful'},200
+class EmployeeRes(Resource):
+
+        def get(self, id):
+            try:
+                emp_details = Employee.query.filter_by(id=id)
+
+                result = employee_schema.dump(emp_details)
+                return jsonify({"Employee": result.data})
+            except Exception as e:
+                print('Error', e)
+                return {'Not Found': 'Record not found.'}, 404
 
 
 api.add_resource(EmployeeResource, '/api/employee')
-# api.add_resource(EmployeeRes, '/api/employee/<string:name>')
+api.add_resource(EmployeeRes, '/api/employee/<int:id>')
 app.register_blueprint(employee_bp)
 
 

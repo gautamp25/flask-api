@@ -24,48 +24,49 @@ class OrganizationResource(Resource):
         return jsonify({"Organization": result.data})
 
     def post(self):
-        data = request.get_json()
-
+        data = request.get_json(force=True)
+        if not data:
+            return {'message': 'No input data provided'}, 400
         if request.method == "POST":
             org_name = data['name']
             country = data['country']
             city = data['city']
             created_date = datetime.now()
             is_active = data['is_active']
+
+            exists = Organization.query.filter_by(organization_name=data['name']).first()
+            if exists:
+                return {'message': 'Organization already exists'}, 400
             org = Organization(org_name, country, city, created_date, is_active)
+            print(org.organization_name)
             Organization.save_data(org)
-            return 'Done', 201
+            return {'status': 'Organization created'}, 201
         else:
             return {'message':'Something went wrong'}
 
 
 class OrganizationRes(Resource):
     def get(self, id):
-        print(id)
         try:
             org_details = Organization.query.filter_by(id=id)
-            print(Org_details)
             result = organization_schema.dump(org_details)
             return jsonify({"Organization": result.data})
         except Exception as e:
             print('Error', e)
             return {'Not Found': 'Record not found.'}, 404
 
-    def delete(self, id):
-        print("*******************",id)
-        try:
-            org = Organization.query.filter_by(id=1).first()
-            # result = organization_schema.dump(org)
-            # org_id = json.dump(org.id)
-            print('********',org, org.id)
-            # department = Department.query.filter_by(organization_id=org.id).first()
-            # print(department.id)
-            db.session.delete(org.id)
-            # db.session.delete(department.id)
-            db.session.commit()
-        except:
-            return {'message': 'Something went wrong'}, 400
-        return {'Success': 'Organization delete successful'},200
+    # def delete(self, id):
+    #     try:
+    #         org = Organization.query.filter_by(id=id).delete()
+    #         # result = organization_schema.dump(org)
+    #         # org_id = json.dump(org.id)
+    #         print('********',org, org.id)
+    #         # db.session.delete(org.id)
+    #         # db.session.delete(department.id)
+    #         db.session.commit()
+    #         return {'Success': 'Organization delete successful'}, 200
+    #     except:
+    #         return {'message': 'Something went wrong'}, 400
 
 
 api.add_resource(OrganizationResource, '/api/organization')

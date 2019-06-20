@@ -21,13 +21,13 @@ class DepartmentResource(Resource):
         if request.method == "POST":
             try:
                 org_id = Organization.query.filter(Organization.organization_name == data['orgname']).first()
-                print('************',org_id.id)
+                # print('************',org_id.id)
                 dept = Department(data['dp_name'], org_id.id)
                 Department.save_data(dept)
                 success = {"message": "Department created successfully"}
                 
             except:
-                return {'message':'Something went wrong'}, 400
+                return {'message': 'Something went wrong'}, 400
             return success, 201
         else:
             return {'message': 'Something went wrong'}

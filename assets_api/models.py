@@ -39,7 +39,7 @@ class Organization(db.Model):
 class OrganizationSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ("organization_name", "country", "city", "created_date", "is_active")
+        fields = ("id", "organization_name", "country", "city", "created_date", "is_active")
 
 
 organization_schema = OrganizationSchema()
@@ -48,7 +48,6 @@ organization_schema = OrganizationSchema(many=True)
 
 # Table departmentt
 class Department(db.Model):
-
     __tablename__ = 'departments'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -92,12 +91,12 @@ class User(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    # def __repr__(self):
-    #     return f"Username {self.username}"
+
 class UserSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ("username", "password_hash")
+
 
 user_schema = UserSchema()
 user_schema = UserSchema(many=True)
@@ -138,7 +137,7 @@ class Employee(db.Model):
 
 class EmployeeSchema(ma.Schema):
     class Meta:
-        fields = ('first_name', 'last_name', 'designation', 'emp_id', 'address', 'join_date', 'user_id', 'department_id')
+        fields = ('id', 'first_name', 'last_name', 'designation', 'emp_id', 'address', 'join_date', 'user_id', 'department_id')
 
 
 employee_schema = EmployeeSchema()
