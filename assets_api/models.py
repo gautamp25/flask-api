@@ -6,12 +6,6 @@ from flask_marshmallow import Marshmallow
 ma = Marshmallow(app)
 
 
-# common method
-def save_data(self):
-    db.session.add(self)
-    db.session.commit()
-
-
 class Organization(db.Model):
     __tablename__ = 'organizations'
 

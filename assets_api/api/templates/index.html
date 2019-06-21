@@ -10,10 +10,19 @@
 </head>
 <body>
     <div class="container">
-    <h1>Welcome to RESTful Page.</h1>
-    <h2>Endpoint URL</h2>
+    <h1 class="text-center"><b><i>Asset Management System</i></b></h1>
+        <h3>Resources</h3>
+        <ul>
+            <li>Organization</li>
+            <li>Department</li>
+            <li>User</li>
+            <li>Employee</li>
+            <li>Category</li>
+            <li>Asset</li>
+            <li>AssignedAssets</li>
+        </ul>
+    <h2 class="text-center">Endpoint URL</h2><hr>
 
-        <p>Employee</p>
         <table border="1" >
             <tr>
                 <th>Method</th>
@@ -31,13 +40,141 @@
                 <td><button class="btn btn-primary">POST</button></td>
                 <td><a href="https://flaskrest-api.herokuapp.com/api/organization">flaskrest-api.herokuapp.com/api/organization</a> </td>
                 <td><code>{
-                    "name":"Infy",
+                    "name":"Nitor",
                     "country":"India",
                     "city":"Pune",
                     "is_active":1
                     }</code>
                 </td>
                 <td>Create Organization</td>
+            </tr>
+            <tr>
+                <td ><button class="btn btn-success">GET</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/organization/1">flaskrest-api.herokuapp.com/api/organization/{id}</a></td>
+                <td>Id</td>
+                <td>Get single organization</td>
+            </tr>
+            <tr>
+                <td ><button class="btn btn-success">GET</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/department">flaskrest-api.herokuapp.com/api/department</a></td>
+                <td>None</td>
+                <td>Get all Department</td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-primary">POST</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/department">flaskrest-api.herokuapp.com/api/department</a> </td>
+                <td><code>{
+                    "orgname":"NIPL",
+                    "dp_name":"P&D"
+                    }</code>
+                </td>
+                <td>Create Department</td>
+            </tr>
+            <tr>
+                <td ><button class="btn btn-success">GET</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/user">flaskrest-api.herokuapp.com/api/user</a></td>
+                <td>None</td>
+                <td>Get all Users</td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-success">GET</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/employee">flaskrest-api.herokuapp.com/api/api/employee</a> </td>
+                <td>None
+                </td>
+                <td>Get all Employees</td>
+            </tr>
+            <tr>
+                <td ><button class="btn btn-primary">POST</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/employee">flaskrest-api.herokuapp.com/api/employee</a></td>
+                <td><code>
+                    {
+                        "firstname":"Harshad",
+                        "firstname":"Patil",
+                        "designation":"Software Developer",
+                        "empid":03,
+                        "address":"Pune",
+                        "department":"P&D",
+                        "doj":"2019-01-01"
+                    }
+                </code></td>
+                <td>Create Employee</td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-success">GET</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/employee/1">flaskrest-api.herokuapp.com/api/api/employee/{id}</a> </td>
+                <td>id
+                </td>
+                <td>Get single Employee</td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-success">GET</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/category">flaskrest-api.herokuapp.com/api/api/category</a> </td>
+                <td>None
+                </td>
+                <td>Get all Category</td>
+            </tr>
+            <tr>
+                <td ><button class="btn btn-primary">POST</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/category">flaskrest-api.herokuapp.com/api/category</a></td>
+                <td><code>
+                    {
+                        "category":"Software",
+                        "subcategory":"3"
+                    }
+                </code></td>
+                <td>Create Category</td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-success">GET</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/asset">flaskrest-api.herokuapp.com/api/api/asset</a> </td>
+                <td>None
+                </td>
+                <td>Get all Assets</td>
+            </tr>
+            <tr>
+                <td ><button class="btn btn-primary">POST</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/asset">flaskrest-api.herokuapp.com/api/asset</a></td>
+                <td><code>
+                    {
+                        "asset_name":"Laptop",
+                        "price":"60000",
+                        "description":"Apple laptop",
+                        "serial_no":"NIPL005",
+                        "purchase_date":"2018-08-25",
+                        "is_dead":0,
+                        "category":"Hardware",
+                        "organization":"NIPL"
+                    }
+                </code></td>
+                <td>Create Asset</td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-success">GET</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/assetassign">flaskrest-api.herokuapp.com/api/api/assetassign</a> </td>
+                <td>None
+                </td>
+                <td>Get all Assigned Assets</td>
+            </tr>
+            <tr>
+                <td ><button class="btn btn-primary">POST</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/assetassign">flaskrest-api.herokuapp.com/api/assetassign</a></td>
+                <td><code>
+                    {
+                        "asset_name":"Laptop",
+                        "user":"Harshad",
+                        "employee_id":03,
+                        "category":"Hardware",
+                        "date_assigned":"2019-03-25",
+                    }
+                </code></td>
+                <td>Assign Asset</td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-success">GET</button></td>
+                <td><a href="https://flaskrest-api.herokuapp.com/api/assignedasset/ajit">flaskrest-api.herokuapp.com/api/api/assignedasset/{name}</a> </td>
+                <td>Username
+                </td>
+                <td>Get Assigned Asset to single user</td>
             </tr>
 
         </table>

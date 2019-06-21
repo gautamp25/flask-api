@@ -50,13 +50,8 @@ class UserRes(Resource):
         return {'Success': 'User delete successful'},200
 
 
-
-
-
-
-
 api.add_resource(UserResource, '/api/user')
-api.add_resource(UserRes, '/api/organization/<string:name>')
+# api.add_resource(UserRes, '/api/user/<string:name>')
 app.register_blueprint(user_bp)
 
 

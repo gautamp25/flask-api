@@ -26,7 +26,7 @@ class EmployeeResource(Resource):
             username = data['firstname'].lower()
             password = data['firstname']+'123'
             department = data['department']
-            joindate = datetime.today()
+            joindate = datetime.strptime(data['doj'], '%Y-%m-%d')
             # print('***********', username, password, department, joindate)
 
             try:
